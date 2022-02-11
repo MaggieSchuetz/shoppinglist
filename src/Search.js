@@ -1,23 +1,15 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 
-export default function Search({ props }) {
-  const { Searcher } = require('fast-fuzzy');
-  const [userInput, setUserInput] = useState('');
-  const searcher = new Searcher(props.message);
-  searcher.search(userInput); //returns array
-
-  function handleUserInput(e) {
-    setUserInput(e.target.value);
-  }
-
+export default function Search({ handleUserInput, searchInput }) {
   return (
-    <SearchContainer>
+    <SearchForm onSubmit={e => e.preventDefault()}>
       <label>
         What do you want to buy?
-        <SearchInput onChange={handleUserInput}></SearchInput>
+        <SearchInput
+          onChange={handleUserInput}
+        ></SearchInput>
       </label>
-    </SearchContainer>
+    </SearchForm>
   );
 }
 
@@ -26,7 +18,7 @@ const SearchInput = styled.input`
   margin: 5px 0;
 `;
 
-const SearchContainer = styled.section`
+const SearchForm = styled.form`
   display: grid;
   gap: 10px;
 `;
