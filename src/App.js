@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-
+import Search from './Search.js';
 function App() {
   const [items, setItems] = useState([]);
   const [hasError, setHasError] = useState(false);
@@ -28,8 +28,8 @@ function App() {
   return (
     <AppGrid>
       <h1>Shopping List</h1>
-
       {hasError && <p>Error: could not load shopping items</p>}
+      <Search message={items} />
     </AppGrid>
   );
 }
