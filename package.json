@@ -35,5 +35,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "fast-fuzzy": "^1.11.1",
+    "fuzzy": "^0.1.3"
   }
 }

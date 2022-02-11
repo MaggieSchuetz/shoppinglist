@@ -7,6 +7,8 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
+  width: 100vw;
+  padding: 20px;
   background: linear-gradient(to right, #D4D3DD, #EFEFBB);
 }
 
