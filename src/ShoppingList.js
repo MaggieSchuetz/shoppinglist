@@ -8,11 +8,11 @@ export default function ShoppingList({ shoppingList, updateShoppingList }) {
         <ListItem
           item={item}
           key={index}
-          handleItemClick={() =>
+          handleItemClick={() => {
             updateShoppingList(draft => {
               draft.splice(index, 1);
-            })
-          }
+            });
+          }}
         />
       ))}
     </ShoppingListContainer>
