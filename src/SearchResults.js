@@ -5,6 +5,7 @@ export default function SearchResults({
   shoppingList,
   setShoppingList,
   filteredResults,
+  userInput,
 }) {
   return (
     <SearchResultsContainer>
@@ -14,10 +15,15 @@ export default function SearchResults({
           <ListItem
             item={item}
             key={index}
-            handleItemClick={() => addItemToList(item)}
+            handleItemClick={() => {
+              addItemToList(item);
+              console.log(filteredResults);
+            }}
           />
         ))}
-      <p hidden={filteredResults.length !== 0}>No matching items are found.</p>
+      {filteredResults.length === 0 && userInput.length !== 0 && (
+        <p>No machting items found.</p>
+      )}
     </SearchResultsContainer>
   );
 

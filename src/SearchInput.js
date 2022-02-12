@@ -5,7 +5,7 @@ export default function SearchInput({ onSetUserInput }) {
     <label>
       What do you want to buy?
       <UserInput
-        onInput={e => {
+        onChange={e => {
           onSetUserInput(e.target.value);
         }}
       />

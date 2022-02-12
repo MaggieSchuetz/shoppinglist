@@ -9,8 +9,9 @@ export default function Search({ shoppingList, onSetShoppingList }) {
   const { Searcher } = require('fast-fuzzy');
   const itemNames = allItemsData.map(itemData => itemData.name.en);
   const searcher = new Searcher(itemNames, { ignoreCase: true });
-  //returns array
   const filteredResults = searcher.search(userInput);
+  console.log(userInput);
+  console.log(filteredResults);
 
   useEffect(() => {
     loadAllItems();
@@ -40,6 +41,7 @@ export default function Search({ shoppingList, onSetShoppingList }) {
         shoppingList={shoppingList}
         setShoppingList={onSetShoppingList}
         filteredResults={filteredResults}
+        userInput={userInput}
       />
     </section>
   );
