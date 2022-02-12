@@ -6,6 +6,7 @@ export default function SearchResults({
   setShoppingList,
   filteredResults,
   userInput,
+  setUserInput,
 }) {
   return (
     <SearchResultsContainer>
@@ -17,7 +18,7 @@ export default function SearchResults({
             key={index}
             handleItemClick={() => {
               addItemToList(item);
-              console.log(filteredResults);
+              setUserInput(() => '');
             }}
           />
         ))}
@@ -28,7 +29,6 @@ export default function SearchResults({
   );
 
   function addItemToList(item) {
-    console.log('vorher' + item);
     setShoppingList([...shoppingList, item]);
   }
 }

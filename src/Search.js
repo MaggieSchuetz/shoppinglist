@@ -10,8 +10,6 @@ export default function Search({ shoppingList, onSetShoppingList }) {
   const itemNames = allItemsData.map(itemData => itemData.name.en);
   const searcher = new Searcher(itemNames, { ignoreCase: true });
   const filteredResults = searcher.search(userInput);
-  console.log(userInput);
-  console.log(filteredResults);
 
   useEffect(() => {
     loadAllItems();
@@ -35,13 +33,14 @@ export default function Search({ shoppingList, onSetShoppingList }) {
 
   return (
     <section>
-      <SearchInput onSetUserInput={setUserInput} />
+      <SearchInput onSetUserInput={setUserInput} userInput={userInput} />
       {hasError && <p>Error: could not load shopping items</p>}
       <SearchResults
         shoppingList={shoppingList}
         setShoppingList={onSetShoppingList}
         filteredResults={filteredResults}
         userInput={userInput}
+        setUserInput={setUserInput}
       />
     </section>
   );

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function SearchInput({ onSetUserInput }) {
+export default function SearchInput({ userInput, onSetUserInput }) {
   return (
     <label>
       What do you want to buy?
@@ -8,6 +8,8 @@ export default function SearchInput({ onSetUserInput }) {
         onChange={e => {
           onSetUserInput(e.target.value);
         }}
+        type="text"
+        value={userInput}
       />
     </label>
   );
