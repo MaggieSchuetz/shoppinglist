@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import SearchInput from './SearchInput.js';
 import SearchResults from './SearchResults.js';
 
@@ -32,7 +33,7 @@ export default function Search({ shoppingList, onSetShoppingList }) {
   }
 
   return (
-    <section>
+    <SearchContainer>
       <SearchInput onSetUserInput={setUserInput} userInput={userInput} />
       {hasError && <p>Error: could not load shopping items</p>}
       <SearchResults
@@ -42,6 +43,10 @@ export default function Search({ shoppingList, onSetShoppingList }) {
         userInput={userInput}
         setUserInput={setUserInput}
       />
-    </section>
+    </SearchContainer>
   );
 }
+
+const SearchContainer = styled.section`
+  overflow-y: scroll;
+`;

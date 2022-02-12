@@ -20,7 +20,7 @@ export default App;
 const AppGrid = styled.main`
   height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr 1fr;
+  grid-template-rows: 48px 1fr 2fr;
   gap: 20px;
 `;
 

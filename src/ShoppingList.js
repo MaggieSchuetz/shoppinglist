@@ -15,4 +15,7 @@ const ShoppingListContainer = styled.section`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  align-items: flex-start;
+  align-content: flex-start;
+  overflow-y: scroll;
 `;
