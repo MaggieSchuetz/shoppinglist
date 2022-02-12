@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useImmer } from 'use-immer';
 import Search from './Search.js';
@@ -5,6 +6,16 @@ import ShoppingList from './ShoppingList.js';
 
 function App() {
   const [shoppingList, updateShoppingList] = useImmer([]);
+
+  useEffect(() => {
+    updateShoppingList(
+      JSON.parse(localStorage.getItem('localShoppingList') || [])
+    );
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('localShoppingList', JSON.stringify(shoppingList));
+  }, [shoppingList]);
 
   return (
     <AppGrid>
