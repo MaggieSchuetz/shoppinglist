@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export default function Results({ item, handleItemClick }) {
   return <ItemButton onClick={handleItemClick}>{item}</ItemButton>;
-
 }
 
 const ItemButton = styled.button`
