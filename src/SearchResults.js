@@ -3,7 +3,7 @@ import ListItem from './ListItem.js';
 
 export default function SearchResults({
   shoppingList,
-  setShoppingList,
+  updateShoppingList,
   filteredResults,
   userInput,
   setUserInput,
@@ -29,7 +29,7 @@ export default function SearchResults({
   );
 
   function addItemToList(item) {
-    setShoppingList([...shoppingList, item]);
+    updateShoppingList([...shoppingList, item]);
   }
 }
 

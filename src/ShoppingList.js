@@ -1,11 +1,19 @@
 import styled from 'styled-components';
 import ListItem from './ListItem.js';
 
-export default function ShoppingList({ shoppingList }) {
+export default function ShoppingList({ shoppingList, updateShoppingList }) {
   return (
     <ShoppingListContainer>
       {shoppingList.map((item, index) => (
-        <ListItem item={item} key={index} />
+        <ListItem
+          item={item}
+          key={index}
+          handleItemClick={() =>
+            updateShoppingList(draft => {
+              draft.splice(index, 1);
+            })
+          }
+        />
       ))}
     </ShoppingListContainer>
   );
