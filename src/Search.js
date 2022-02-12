@@ -1,24 +1,52 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import SearchInput from './SearchInput.js';
+import SearchResults from './SearchResults.js';
 
-export default function Search({ handleUserInput, searchInput }) {
+export default function Search({ shoppingList, onSetShoppingList }) {
+  const [allItemsData, setAllItemsData] = useState([]);
+  const [hasError, setHasError] = useState(false);
+  const [userInput, setUserInput] = useState('');
+  const { Searcher } = require('fast-fuzzy');
+  const itemNames = allItemsData.map(itemData => itemData.name.en);
+  const searcher = new Searcher(itemNames, { ignoreCase: true });
+  const filteredResults = searcher.search(userInput);
+
+  useEffect(() => {
+    loadAllItems();
+  }, []);
+
+  async function loadAllItems() {
+    try {
+      const response = await fetch(
+        'https://fetch-me.vercel.app/api/shopping/items'
+      );
+      if (response.ok) {
+        const results = await response.json();
+        setAllItemsData(results.data);
+      } else {
+        throw new Error('Error: 404 not found');
+      }
+    } catch (error) {
+      setHasError(true);
+    }
+  }
+
   return (
-    <SearchForm onSubmit={e => e.preventDefault()}>
-      <label>
-        What do you want to buy?
-        <SearchInput
-          onChange={handleUserInput}
-        ></SearchInput>
-      </label>
-    </SearchForm>
+    <SearchContainer>
+      <SearchInput onSetUserInput={setUserInput} userInput={userInput} />
+      {hasError && <p>Error: could not load shopping items</p>}
+      <SearchResults
+        shoppingList={shoppingList}
+        setShoppingList={onSetShoppingList}
+        filteredResults={filteredResults}
+        userInput={userInput}
+        setUserInput={setUserInput}
+      />
+    </SearchContainer>
   );
 }
 
-const SearchInput = styled.input`
-  width: 100%;
-  margin: 5px 0;
-`;
-
-const SearchForm = styled.form`
-  display: grid;
-  gap: 10px;
+const SearchContainer = styled.section`
+  overflow-y: scroll;
 `;
