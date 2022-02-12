@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SearchInput from './SearchInput.js';
 import SearchResults from './SearchResults.js';
 
-export default function Search({ shoppingList, onSetShoppingList }) {
+export default function Search({ shoppingList, onupdateShoppingList }) {
   const [allItemsData, setAllItemsData] = useState([]);
   const [hasError, setHasError] = useState(false);
   const [userInput, setUserInput] = useState('');
@@ -38,7 +38,7 @@ export default function Search({ shoppingList, onSetShoppingList }) {
       {hasError && <p>Error: could not load shopping items</p>}
       <SearchResults
         shoppingList={shoppingList}
-        setShoppingList={onSetShoppingList}
+        updateShoppingList={onupdateShoppingList}
         filteredResults={filteredResults}
         userInput={userInput}
         setUserInput={setUserInput}
