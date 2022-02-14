@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Search from './Search.js';
 import ShoppingList from './ShoppingList.js';
 import useLocalStorage from './Hooks/useLocalStorage';
+import useToggle from './Hooks/useToggle.js';
 
 function App() {
   const [shoppingList, setShoppingList] = useLocalStorage(
@@ -11,15 +12,7 @@ function App() {
     []
   );
 
-  // useEffect(() => {
-  //   setShoppingList(
-  //     JSON.parse(localStorage.getItem('localShoppingList') || [])
-  //   );
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem('localShoppingList', JSON.stringify(shoppingList));
-  // }, [shoppingList]);
+  const [isShoppingDone, setIsShoppingDone] = useToggle();
 
   return (
     <AppGrid>
@@ -29,6 +22,9 @@ function App() {
         setShoppingList={setShoppingList}
       />
       <Search shoppingList={shoppingList} onsetShoppingList={setShoppingList} />
+      <button onClick={setIsShoppingDone}>
+        {isShoppingDone ? 'Ja! 👍' : 'Nein... 😣'}
+      </button>
     </AppGrid>
   );
 }
