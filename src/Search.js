@@ -4,7 +4,7 @@ import SearchInput from './SearchInput.js';
 import SearchResults from './SearchResults.js';
 import useFetch from './Hooks/useFetch.js';
 
-export default function Search({ shoppingList, onupdateShoppingList }) {
+export default function Search({ shoppingList, onsetShoppingList }) {
   const [userInput, setUserInput] = useState('');
   const { Searcher } = require('fast-fuzzy');
   const { hasError, allItemsData } = useFetch();
@@ -18,7 +18,7 @@ export default function Search({ shoppingList, onupdateShoppingList }) {
       {hasError && <p>Error: could not load shopping items</p>}
       <SearchResults
         shoppingList={shoppingList}
-        updateShoppingList={onupdateShoppingList}
+        setShoppingList={onsetShoppingList}
         filteredResults={filteredResults}
         userInput={userInput}
         setUserInput={setUserInput}
