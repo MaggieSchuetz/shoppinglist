@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ListItem from './ListItem.js';
 
-export default function ShoppingList({ shoppingList, updateShoppingList }) {
+export default function ShoppingList({ shoppingList, setShoppingList }) {
   return (
     <ShoppingListContainer>
       {shoppingList.map((item, index) => (
@@ -9,12 +9,14 @@ export default function ShoppingList({ shoppingList, updateShoppingList }) {
           item={item}
           key={index}
           handleItemClick={() => {
-            updateShoppingList(draft => {
-              draft.splice(index, 1);
-            });
+            setShoppingList([
+              ...shoppingList.slice(0, index),
+              ...shoppingList.slice(index + 1),
+            ]);
           }}
         />
       ))}
+      {console.log(shoppingList)}
     </ShoppingListContainer>
   );
 }

@@ -1,36 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import SearchInput from './SearchInput.js';
 import SearchResults from './SearchResults.js';
+import useFetch from './Hooks/useFetch.js';
 
-export default function Search({ shoppingList, onupdateShoppingList }) {
-  const [allItemsData, setAllItemsData] = useState([]);
-  const [hasError, setHasError] = useState(false);
+export default function Search({ shoppingList, onsetShoppingList }) {
   const [userInput, setUserInput] = useState('');
   const { Searcher } = require('fast-fuzzy');
+  const { hasError, allItemsData } = useFetch();
   const itemNames = allItemsData.map(itemData => itemData.name.en);
   const searcher = new Searcher(itemNames, { ignoreCase: true });
   const filteredResults = searcher.search(userInput);
-
-  useEffect(() => {
-    loadAllItems();
-  }, []);
-
-  async function loadAllItems() {
-    try {
-      const response = await fetch(
-        'https://fetch-me.vercel.app/api/shopping/items'
-      );
-      if (response.ok) {
-        const results = await response.json();
-        setAllItemsData(results.data);
-      } else {
-        throw new Error('Error: 404 not found');
-      }
-    } catch (error) {
-      setHasError(true);
-    }
-  }
 
   return (
     <SearchContainer>
@@ -38,7 +18,7 @@ export default function Search({ shoppingList, onupdateShoppingList }) {
       {hasError && <p>Error: could not load shopping items</p>}
       <SearchResults
         shoppingList={shoppingList}
-        updateShoppingList={onupdateShoppingList}
+        setShoppingList={onsetShoppingList}
         filteredResults={filteredResults}
         userInput={userInput}
         setUserInput={setUserInput}
